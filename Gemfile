@@ -39,3 +39,6 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'httparty'
+gem 'nokogiri'
+gem 'json'
+gem 'pry'
