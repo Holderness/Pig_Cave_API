@@ -42,3 +42,7 @@ gem 'httparty'
 gem 'nokogiri'
 gem 'json'
 gem 'pry'
+
+gem 'rails-api'
+
+gem 'rails_12factor', group: :production
