@@ -11,10 +11,10 @@ namespace :db do
 
 		CSV.foreach("/Users/frank/src/projects/redditation/sixwordstories.csv", headers: true) do |row|
 			if row["score"] && row["title"] && row["author"] && row["permalink"]
-				score = row["score"].delete("'")
-				title = row["title"].delete("'")
-				author = row["author"].delete("'")
-				permalink = row["permalink"].delete("'")
+				score = row["score"].gsub(/'/, "''")
+				title = row["title"].gsub(/'/, "''")
+				author = row["author"].gsub(/'/, "''")
+				permalink = row["permalink"].gsub(/'/, "''")
 				puts "INSERT INTO stories (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');"
         conn.exec("INSERT INTO stories (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');")
       end
@@ -31,10 +31,10 @@ namespace :db do
 
 		CSV.foreach("/Users/frank/src/projects/redditation/Showerthoughts.csv", headers: true) do |row|
 			if row["score"] && row["title"] && row["author"] && row["permalink"]
-				score = row["score"].delete("'")
-				title = row["title"].delete("'")
-				author = row["author"].delete("'")
-				permalink = row["permalink"].delete("'")
+				score = row["score"].gsub(/'/, "''")
+				title = row["title"].gsub(/'/, "''")
+				author = row["author"].gsub(/'/, "''")
+				permalink = row["permalink"].gsub(/'/, "''")
 				puts "INSERT INTO thoughts (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');"
         conn.exec("INSERT INTO thoughts (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');")
       end
