@@ -2,7 +2,7 @@ class DreamsController < ApplicationController
 
 	def index
 		dreams = Dream.all
-		render json: dreams.as_json(only: [:id, :dream])
+		render json: dreams
 	end
 
 	private

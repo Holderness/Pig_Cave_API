@@ -44,5 +44,6 @@ gem 'json'
 gem 'pry'
 
 gem 'rails-api'
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'rails_12factor', group: :production
