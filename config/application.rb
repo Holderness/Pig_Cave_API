@@ -31,7 +31,7 @@ module Redditation
     config.middleware.insert_before 0, "Rack::Cors" do 
       allow do
         origins '*'
-        resource '/markets*', methods: [:get]
+        resource '/stories*', methods: [:get]
       end
     end
 
