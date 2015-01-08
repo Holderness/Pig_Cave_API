@@ -1,6 +1,6 @@
 namespace :db do
 
-	require 'CSV'
+	require 'csv'
 	require 'nokogiri'
 
 	desc "seed database with stories"
