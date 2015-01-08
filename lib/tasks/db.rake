@@ -9,7 +9,8 @@ namespace :db do
 		Story.delete_all
 		conn = PG::Connection.open(:dbname => 'redditation_development')
 
-		CSV.foreach("/Users/frank/src/projects/redditation/sixwordstories.csv", headers: true) do |row|
+# /Users/frank/src/projects/redditation/
+		CSV.foreach("sixwordstories.csv", headers: true) do |row|
 			if row["score"] && row["title"] && row["author"] && row["permalink"]
 				score = row["score"].gsub(/'/, "''")
 				title = row["title"].gsub(/'/, "''")
@@ -29,7 +30,8 @@ namespace :db do
 		Thought.delete_all
 		conn = PG::Connection.open(:dbname => 'redditation_development')
 
-		CSV.foreach("/Users/frank/src/projects/redditation/Showerthoughts.csv", headers: true) do |row|
+# /Users/frank/src/projects/redditation/
+		CSV.foreach("Showerthoughts.csv", headers: true) do |row|
 			if row["score"] && row["title"] && row["author"] && row["permalink"]
 				score = row["score"].gsub(/'/, "''")
 				title = row["title"].gsub(/'/, "''")
