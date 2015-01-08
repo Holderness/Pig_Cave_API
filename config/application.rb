@@ -32,6 +32,8 @@ module Redditation
       allow do
         origins '*'
         resource '/stories*', methods: [:get]
+        resource '/thoughts*', methods: [:get]
+        resource '/dreams*', methods: [:get]
       end
     end
 
