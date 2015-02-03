@@ -27,19 +27,17 @@ namespace :db do
   task :showerthoughts => :environment do
 
     Thought.delete_all
-    conn = PG::Connection.open(:dbname => 'redditation_development')
 
     CSV.foreach("Showerthoughts.csv", headers: true) do |row|
       if row["score"] && row["title"] && row["author"] && row["permalink"]
-        score = row["score"].gsub(/'/, "''")
-        title = row["title"].gsub(/'/, "''")
-        author = row["author"].gsub(/'/, "''")
-        permalink = row["permalink"].gsub(/'/, "''")
-        puts "INSERT INTO thoughts (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');"
-        conn.exec("INSERT INTO thoughts (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');")
+        Thought.create({
+          score: row["score"].gsub(/'/, "''"),
+          title: row["title"].gsub(/'/, "''"),
+          author: row["author"].gsub(/'/, "''"),
+          permalink: row["permalink"].gsub(/'/, "''")
+        })
       end
     end
-    conn.close
   end
 
   desc "seed database with more thoughts"
