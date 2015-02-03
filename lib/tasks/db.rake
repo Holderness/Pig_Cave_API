@@ -1,41 +1,41 @@
 namespace :db do
 
-	require 'csv'
-	require 'nokogiri'
+  require 'csv'
+  require 'nokogiri'
 
-	desc "seed database with stories"
-	task :sixwordstories => :environment do
+  desc "seed database with stories"
+  task :sixwordstories => :environment do
 
-		Story.delete_all
-		conn = PG::Connection.open(:dbname => 'redditation_development')
+  Story.delete_all
+  conn = PG::Connection.open(:dbname => 'redditation_development')
 
-		CSV.foreach("/Users/frank/src/projects/redditation/sixwordstories.csv", headers: true) do |row|
-			if row["score"] && row["title"] && row["author"] && row["permalink"]
-				score = row["score"].gsub(/'/, "''")
-				title = row["title"].gsub(/'/, "''")
-				author = row["author"].gsub(/'/, "''")
-				permalink = row["permalink"].gsub(/'/, "''")
-				puts "INSERT INTO stories (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');"
-        conn.exec("INSERT INTO stories (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');")
-      end
+  CSV.foreach("/Users/frank/src/projects/redditation/sixwordstories.csv", headers: true) do |row|
+    if row["score"] && row["title"] && row["author"] && row["permalink"]
+      score = row["score"].gsub(/'/, "''")
+      title = row["title"].gsub(/'/, "''")
+      author = row["author"].gsub(/'/, "''")
+      permalink = row["permalink"].gsub(/'/, "''")
+      puts "INSERT INTO stories (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');"
+      conn.exec("INSERT INTO stories (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');")
     end
+  end
     conn.close
   end
 
 
-	desc "seed database with thoughts"
-	task :showerthoughts => :environment do
+  desc "seed database with thoughts"
+  task :showerthoughts => :environment do
 
-		Thought.delete_all
-		conn = PG::Connection.open(:dbname => 'redditation_development')
+    Thought.delete_all
+    conn = PG::Connection.open(:dbname => 'redditation_development')
 
-		CSV.foreach("/Users/frank/src/projects/redditation/Showerthoughts.csv", headers: true) do |row|
-			if row["score"] && row["title"] && row["author"] && row["permalink"]
-				score = row["score"].gsub(/'/, "''")
-				title = row["title"].gsub(/'/, "''")
-				author = row["author"].gsub(/'/, "''")
-				permalink = row["permalink"].gsub(/'/, "''")
-				puts "INSERT INTO thoughts (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');"
+    CSV.foreach("/Users/frank/src/projects/redditation/Showerthoughts.csv", headers: true) do |row|
+      if row["score"] && row["title"] && row["author"] && row["permalink"]
+        score = row["score"].gsub(/'/, "''")
+        title = row["title"].gsub(/'/, "''")
+        author = row["author"].gsub(/'/, "''")
+        permalink = row["permalink"].gsub(/'/, "''")
+        puts "INSERT INTO thoughts (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');"
         conn.exec("INSERT INTO thoughts (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');")
       end
     end
