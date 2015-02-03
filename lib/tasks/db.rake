@@ -6,20 +6,18 @@ namespace :db do
   desc "seed database with stories"
   task :sixwordstories => :environment do
 
-  Story.delete_all
-  conn = PG::Connection.open(:dbname => 'redditation_development')
+    Story.delete_all
 
-  CSV.foreach("sixwordstories.csv", headers: true) do |row|
-    if row["score"] && row["title"] && row["author"] && row["permalink"]
-      score = row["score"].gsub(/'/, "''")
-      title = row["title"].gsub(/'/, "''")
-      author = row["author"].gsub(/'/, "''")
-      permalink = row["permalink"].gsub(/'/, "''")
-      puts "INSERT INTO stories (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');"
-      conn.exec("INSERT INTO stories (score, title, author, permalink) VALUES ('#{score}', '#{title}', '#{author}', '#{permalink}');")
+    CSV.foreach("sixwordstories.csv", headers: true) do |row|
+      if row["score"] && row["title"] && row["author"] && row["permalink"]
+        Story.create({
+          score: row["score"].gsub(/'/, "''"),
+          title: row["title"].gsub(/'/, "''"),
+          author: row["author"].gsub(/'/, "''"),
+          permalink: row["permalink"].gsub(/'/, "''")
+        })
+      end
     end
-  end
-    conn.close
   end
 
 
