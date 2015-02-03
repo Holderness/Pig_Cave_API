@@ -111,20 +111,20 @@ namespace :db do
   	arlie_chris_ed_joan_naturalscientist = HTTParty.get('http://www.dreambank.net/random_sample.cgi?series=arlie&series=chris&series=ed&series=joan&series=natural_scientist&min=50&max=300&n=1500')
 
 
-  	def to_arr(dreampage)
-  		dream_array = []
-  		dreampage_rdom = Nokogiri::HTML(dreampage)
+    def to_arr(dreampage)
+      dream_array = []
+      dreampage_rdom = Nokogiri::HTML(dreampage)
       dreampage_span = dreampage_rdom.css('span')
       dream_arr = dreampage_span.map do |dream|
-      	dream.text
+        dream.text
       end
       dream_arr.each do |dream|
-      	dream.scrub!(".5")
-      	dreaming = dream.gsub(/([^.]*)$/, "").gsub(/\A([^)]*)./, "").gsub("\"", "'")
-      	if dreaming.include?("[")
-      		dreaming.gsub!(/\A([^\]]*)./, "")
-      	end
-      	dream_array << dreaming
+        dream.scrub!(".5")
+        dreaming = dream.gsub(/([^.]*)$/, "").gsub(/\A([^)]*)./, "").gsub("\"", "'")
+        if dreaming.include?("[")
+          dreaming.gsub!(/\A([^\]]*)./, "")
+        end
+        dream_array << dreaming
       end
       return dream_array
     end
