@@ -7,7 +7,7 @@ namespace :db do
   task :sixwordstories => :environment do
 
   Story.delete_all
-  conn = PG::Connection.open(:dbname => 'redditation_development')
+  conn = PG::Connection.open(:dbname => ENV['HEROKU_POSTGRESQL_ONYX'] || 'redditation_development')
 
   CSV.foreach("sixwordstories.csv", headers: true) do |row|
     if row["score"] && row["title"] && row["author"] && row["permalink"]
@@ -27,7 +27,7 @@ namespace :db do
   task :showerthoughts => :environment do
 
     Thought.delete_all
-    conn = PG::Connection.open(:dbname => 'redditation_development')
+    conn = PG::Connection.open(:dbname => ENV['HEROKU_POSTGRESQL_ONYX'] || 'redditation_development')
 
     CSV.foreach("Showerthoughts.csv", headers: true) do |row|
       if row["score"] && row["title"] && row["author"] && row["permalink"]
